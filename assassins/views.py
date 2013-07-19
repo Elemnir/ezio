@@ -5,7 +5,10 @@ from assassins.models import Player
 
 def index(request):
     """displays game statistics"""
-    return render_to_response('assassins/index.html')
+    playerlist = Player.objects.all().order_by('-kills')
+    return render_to_response('assassins/index.html', {
+                              'playerlist': playerlist
+                             })
 
 def panel(request):
     """displays the player panel"""

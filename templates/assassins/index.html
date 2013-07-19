@@ -1,0 +1,18 @@
+{% if playerlist %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Kills</th>
+            <th>Alive</th>
+        </tr>
+        {% for player in playerlist %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.kills }}</td>
+            <td>{{ player.alive }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No players, someone should do something about that.</p>
+{% endif %}
