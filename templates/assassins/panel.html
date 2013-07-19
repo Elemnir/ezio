@@ -1,0 +1,14 @@
+<!-- Currently unused template -->
+<h1>Report a Tag</h1>
+
+{% if system_message %}
+<p><strong>{{ system_message }}</strong></p>
+{% endif %}
+
+<form action="assassins/report/" method="post">
+{% csrf_token %}
+    Your Name: <input type="text" name="playername">
+    Your Key: <input type="text" name="playerkey">
+    Target's Key: <input type="text" name="targetkey">
+    <input type="submit" value="Report"/>
+</form>
