@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}UTK HvZ Club - Assassins{% endblock %}
+
+{% block content %}
 {% if playerlist %}
     <table>
         <tr>
@@ -16,3 +21,4 @@
 {% else %}
     <p>No players, someone should do something about that.</p>
 {% endif %}
+{% endblock %}

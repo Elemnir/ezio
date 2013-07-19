@@ -44,14 +44,28 @@ def toggle_alive(modeladmin, request, queryset):
         player.save()
 toggle_alive.short_description = "Toggle Alive/Dead for selected players"
 
+def safe_delete(modeladmin, request, queryset):
+    """safely unlink and delete players in the queryset"""
+    for player in queryset:
+        playerlist = Player.objects.all()
+        for targeter in playerlist:
+            if targeter.target == player:
+                targeter.target = None
+                targeter.save()
+        player.delete()
+safe_delete.short_description = "**Safely** delete selected players"
+
 class PlayerAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Player', {'fields': (('name', 'email'), ('key', 'kills', 'alive'))}),
         ('Target', {'fields': ['target'], 'classes': ['collapse']}),
     ]
     list_display = ('name', 'alive', 'key', 'kills', 'target')
-    search_fields = ['name', 'key']
+    search_fields = ['name', 'key', 'alive']
     ordering = ['-alive', 'name']
-    actions = [generate_keys, initial_targets, toggle_alive]
+    actions = [generate_keys, initial_targets, toggle_alive, safe_delete]
+
+# remove the default delete because it breaks things
+admin.site.disable_action('delete_selected')
 
 admin.site.register(Player, PlayerAdmin)

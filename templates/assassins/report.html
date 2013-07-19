@@ -1,4 +1,9 @@
-<h1>Report a Tag</h1>
+{% extends "base.html" %}
+
+{% block title %}UTK HvZ Club - Assassins - Report a Kill{% endblock %}
+
+{% block content %}
+<h1>Report a Kill</h1>
 
 {% if system_message %}
 <p><strong>{{ system_message }}</strong></p>
@@ -11,3 +16,4 @@
     Target's Key: <input type="text" name="targetkey"><br/>
     <input type="submit" value="Report"/>
 </form>
+{% endblock %}
