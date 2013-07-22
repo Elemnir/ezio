@@ -1,0 +1,22 @@
+{% extends "assassins_base.html" %}
+
+{% block title %}{{ block.super }} - View Your Target{% endblock %}
+
+{% block content %}
+<h2>View Your Target</h2>
+
+{% if system_message %}
+<p><strong>{{ system_message }}</strong></p>
+{% endif %}
+
+<form action="" method="post">
+{% csrf_token %}
+    Your Name:<br/> 
+    <input type="text" name="playername">
+    <br/><br/>
+    Your Key:<br/> 
+    <input type="text" name="playerkey">
+    <br/><br/>
+    <input type="submit" value="Report"/>
+</form>
+{% endblock %}

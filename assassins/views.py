@@ -10,6 +10,26 @@ def index(request):
         'playerlist': playerlist
     })
 
+def view_target(request):
+    """provides a form for displaying target info"""
+    if request.method != 'POST':
+        return render_to_response('assassins/view_target.html',
+                                  context_instance=RequestContext(request))
+
+    try:
+        reporting_player = Player.objects.get(name=request.POST['playername'],
+                                              key=request.POST['playerkey'])
+    except (KeyError, Player.DoesNotExist):
+        return render_to_response('assassins/view_target.html', {
+            'system_message': "Your name or key is incorrect.",
+        }, context_instance=RequestContext(request))
+    else:
+        return render_to_response('assassins/view_target.html', {
+            'system_message': "Your target is: " + str(player.target),
+        }, context_instance=RequestContext(request))
+    
+        
+
 def report(request):
     """provides a form for logging kills"""
     if request.method != 'POST':
@@ -49,4 +69,3 @@ def report(request):
         return render_to_response('assassins/report.html', {
             'system_message': message,
         }, context_instance=RequestContext(request))
-        #return HttpResponseRedirect(reverse('assassins.views.panel'))
