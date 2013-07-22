@@ -10,6 +10,7 @@ def index(request):
         'playerlist': playerlist
     })
 
+
 def view_target(request):
     """provides a form for displaying target info"""
     if request.method != 'POST':
@@ -29,7 +30,6 @@ def view_target(request):
         }, context_instance=RequestContext(request))
     
         
-
 def report(request):
     """provides a form for logging kills"""
     if request.method != 'POST':
@@ -69,3 +69,12 @@ def report(request):
         return render_to_response('assassins/report.html', {
             'system_message': message,
         }, context_instance=RequestContext(request))
+
+
+def leaderboard(request):
+    """display a leader board of top players over all time"""
+    playerlist = Player.objects.all().order_by("-kills", "name")
+    return render_to_response('assassins/leaderboard.html', {
+        'playerlist': playerlist
+    })
+

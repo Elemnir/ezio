@@ -1,0 +1,23 @@
+{% extends "assassins_base.html" %}
+
+{% block title %}{{ block.super}} - Leaderboard{% endblock %}
+
+{% block content %}
+{% if playerlist %}
+    <p><h2>Assassins Leaderboard</h2></p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Kills</th>
+        </tr>
+        {% for player in playerlist %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.kills }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No players. Holler at an admin to fix it.</p>
+{% endif %}
+{% endblock %}
