@@ -1,14 +1,12 @@
-{% extends "base.html" %}
+{% extends "assassins_base.html" %}
 
-{% block title %}UTK HvZ Club - Assassins{% endblock %}
+{% block title %}{{ block.super}}{% endblock %}
 
 {% block content %}
-<a href="report/">Report a Kill</a>
-<br/><br/>
 {% if playerlist %}
     <table>
         <tr>
-            <th colspan=3>Active Game</th>
+            <th colspan=3>Current Game</th>
         </tr>
         <tr>
             <th>Name</th>
@@ -24,6 +22,6 @@
         {% endfor %}
     </table>
 {% else %}
-    <p>No players, someone should do something about that.</p>
+    <p>No active players. Must not be a game going on.</p>
 {% endif %}
 {% endblock %}

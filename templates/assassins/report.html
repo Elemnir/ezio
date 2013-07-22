@@ -1,19 +1,25 @@
-{% extends "base.html" %}
+{% extends "assassins_base.html" %}
 
-{% block title %}UTK HvZ Club - Assassins - Report a Kill{% endblock %}
+{% block title %}{{ block.super }} - Report a Kill{% endblock %}
 
 {% block content %}
-<h1>Report a Kill</h1>
+<h2>Report a Kill</h2>
 
 {% if system_message %}
 <p><strong>{{ system_message }}</strong></p>
 {% endif %}
 
-<form action="report/" method="post">
+<form action="" method="post">
 {% csrf_token %}
-    Your Name: <input type="text" name="playername"><br/>
-    Your Key: <input type="text" name="playerkey"><br/>
-    Target's Key: <input type="text" name="targetkey"><br/>
+    Your Name:<br/> 
+    <input type="text" name="playername">
+    <br/><br/>
+    Your Key:<br/> 
+    <input type="text" name="playerkey">
+    <br/><br/>
+    Target's Key:<br/> 
+    <input type="text" name="targetkey">
+    <br/><br/>
     <input type="submit" value="Report"/>
 </form>
 {% endblock %}

@@ -1,12 +1,99 @@
-<html>
+<html lang="en">
     <head>
     <title>{% block title %}UTK HvZ Club{% endblock %}</title>
+    <style type="text/css">
+        {% block style %}
+        body,
+        html {
+            margin:0;
+            padding:0;
+            color:#000;
+            background:#ff9900;
+        }
+
+        #wrap {
+            width:800px;
+            padding:0;
+            margin:0 auto;
+            background:#cdcdb4;
+        }
+        
+        #header {
+            background:#cdcdb4;
+            padding:5px 10px;
+        }
+        
+        #navbar {
+            background:#90907e;
+            padding:5px 10px;
+        }
+        #navbar ul {
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        #navbar li {
+            display:inline;
+            margin:0;
+            padding:0;
+        }
+        
+        #content {
+            background:#ffffff;
+            float:left;
+            width:600px;
+            margin:0;
+            padding:10px;
+        }
+        
+        #sidebar {
+            background:#cdcdb4;
+            float:right;
+            width:180px;
+            margin:0;
+        }
+        
+        #footer {
+            background:#90907e;
+            clear:both;
+            padding:5px 10px;
+        }
+        {% endblock %}
+    </style>
     </head>
 
     <body>
-        <div id="pageContent">
-        {% block content %}
-        {% endblock %}
+        <div id="wrap">
+            <div id="header">
+                {% block header %}
+                <h1>I AM BANNER!</h1>
+                {% endblock %}
+            </div>
+
+            <div id="navbar">
+                {% block nav %}
+                <ul>
+                    <li><a href="http://utkhvz.com">HvZ Home</a></li>
+                    <li><a href="/assassins/">Assassins Portal</a></li>
+                </ul>
+                {% endblock %}
+            </div>
+        
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            <div id="sidebar">
+                {% block sidebar %}
+                {% endblock %}
+            </div>
+
+            <div id="footer">
+                {% block footer %}
+                <p>footer goes here</p>
+                {% endblock %}
+            </div>
         </div>
     </body>
 </html>

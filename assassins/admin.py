@@ -18,9 +18,9 @@ def generate_keys(modeladmin, request, queryset):
 generate_keys.short_description = "Generate keys for selected players"
 
 def initial_targets(modeladmin, request, queryset):
-    """gives all living players a new target and guarantees a single loop of 
-    player-target relationships"""
-    playerlist = list(Player.objects.filter(alive=True))
+    """gives all active, living players a new target and guarantees a single 
+    loop of player-target relationships"""
+    playerlist = list(Player.objects.filter(alive=True, active=True))
     initialplayer = random.choice(playerlist)
     playerlist.remove(initialplayer)
     
@@ -35,7 +35,7 @@ def initial_targets(modeladmin, request, queryset):
 
     currentplayer.target = initialplayer
     currentplayer.save()
-initial_targets.short_description = "Scramble targets for live players"
+initial_targets.short_description = "Scramble targets for live, active players"
 
 def toggle_alive(modeladmin, request, queryset):
     """toggle whether or not each player in the queryset is marked as alive"""
@@ -47,7 +47,7 @@ toggle_alive.short_description = "Toggle Alive/Dead for selected players"
 def safe_delete(modeladmin, request, queryset):
     """safely unlink and delete players in the queryset"""
     for player in queryset:
-        playerlist = Player.objects.all()
+        playerlist = Player.objects.exclude(target=None)
         for targeter in playerlist:
             if targeter.target == player:
                 targeter.target = None
@@ -57,12 +57,13 @@ safe_delete.short_description = "**Safely** delete selected players"
 
 class PlayerAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Player', {'fields': (('name', 'email'), ('key', 'kills', 'alive'))}),
+        ('Player', {'fields': (('name', 'email'), 
+                               ('key', 'kills', 'alive', 'active'))}),
         ('Target', {'fields': ['target'], 'classes': ['collapse']}),
     ]
-    list_display = ('name', 'alive', 'key', 'kills', 'target')
+    list_display = ('active', 'name', 'alive', 'key', 'kills', 'target')
     search_fields = ['name', 'key', 'alive']
-    ordering = ['-alive', 'name']
+    ordering = ['-active', '-alive', 'name']
     actions = [generate_keys, initial_targets, toggle_alive, safe_delete]
 
 # remove the default delete because it breaks things
