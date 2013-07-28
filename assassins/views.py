@@ -52,7 +52,7 @@ def report(request):
             }, context_instance=RequestContext(request))
         
         # create a news report
-        newsmessage = str(report_player) + ' killed ' + str(reporting_player.target) + '.'
+        newsmessage = str(reporting_player) + ' killed ' + str(reporting_player.target) + '.'
         news = NewsReport(report_type='KILL', message=newsmessage)
         news.save()
 
