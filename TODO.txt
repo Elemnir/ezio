@@ -1,0 +1,14 @@
+----Features to Add---- 
+
+*Set up for deployment on a production environment
+
+*Set up email server
+*Add email-sending views and admin actions
+
+*Add user-submitted registration form
+*Allow registration to be turned on our off from the admin panel
+
+*Add images and work on the site's aethetic
+*Add welcome message and news to the assassins index
+*Add ruleset view (https://pypi.python.org/pypi/Markdown)
+

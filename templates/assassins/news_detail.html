@@ -1,0 +1,9 @@
+{% extends "assassins_base.html" %}
+
+{% block title %}{{ block.super}} - {{ report }}{% endblock %}
+
+{% block content %}
+    <p><h2>{{ report.report_type }}: {{ report.pub_date }}</h2></p>
+    
+    <p>{{ report.message }}</p>
+{% endblock %}

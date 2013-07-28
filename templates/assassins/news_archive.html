@@ -1,0 +1,16 @@
+{% extends "assassins_base.html" %}
+
+{% block title %}{{ block.super}} - News Archive{% endblock %}
+
+{% block content %}
+    <p><h2>Assassins News Archive</h2></p>
+    {% if newslist %}
+    <ul>
+    {% for report in newslist %}
+        <li><a href="/assassins/news/{{ report.id }}/">{{ report }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Oops, no news. Looks like the database got busted.</p>
+{% endif %}
+{% endblock %}

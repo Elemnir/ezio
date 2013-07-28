@@ -1,13 +1,16 @@
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from assassins.models import Player
+from assassins.models import Player, NewsReport
 
 def index(request):
-    """displays game statistics"""
+    """displays game statistics and news"""
     playerlist = Player.objects.all().order_by('-alive', '-kills')
+    newslist = NewsReport.objects.all().order_by('-pub_date')[:10]
+    
     return render_to_response('assassins/index.html', {
-        'playerlist': playerlist
+        'playerlist': playerlist,
+        'newslist': newslist,
     })
 
 
@@ -35,7 +38,6 @@ def report(request):
     if request.method != 'POST':
         return render_to_response('assassins/report.html',
                                   context_instance=RequestContext(request))
-    
     try:
         reporting_player = Player.objects.get(name=request.POST['playername'],
                                               key=request.POST['playerkey'])
@@ -49,6 +51,11 @@ def report(request):
                 'system_message': "Incorrect key for your target.",
             }, context_instance=RequestContext(request))
         
+        # create a news report
+        newsmessage = str(report_player) + ' killed ' + str(reporting_player.target) + '.'
+        news = NewsReport(report_type='KILL', message=newsmessage)
+        news.save()
+
         # get the reporter's new target
         newtarget = reporting_player.target.target
 
@@ -63,18 +70,33 @@ def report(request):
         reporting_player.save()
 
         # build a message and render back the page
-        message = "Kill Confirmed. Your new target is: "
-        message += str(reporting_player.target)
+        system_message = "Kill Confirmed. Your new target is: "
+        system_message += str(reporting_player.target)
         
         return render_to_response('assassins/report.html', {
-            'system_message': message,
+            'system_message': system_message,
         }, context_instance=RequestContext(request))
 
 
 def leaderboard(request):
-    """display a leader board of top players over all time"""
+    """display a leaderboard of top players over all time"""
     playerlist = Player.objects.all().order_by("-kills", "name")
     return render_to_response('assassins/leaderboard.html', {
-        'playerlist': playerlist
+        'playerlist': playerlist,
     })
 
+
+def news_archive(request):
+    """display the news archive"""
+    newslist = NewsReport.objects.all().order_by("-pub_date")
+    return render_to_response('assassins/news_archive.html', {
+        'newslist': newslist,
+    })
+
+
+def news_detail(request, news_id):
+    """display details for the selected news report"""
+    report = get_object_or_404(NewsReport, pk=news_id)
+    return render_to_response('assassins/news_detail.html', {
+        'report': report,
+    })
