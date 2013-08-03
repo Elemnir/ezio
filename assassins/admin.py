@@ -1,4 +1,4 @@
-from assassins.models import Player
+from assassins.models import Player, NewsReport
 from django.contrib import admin
 
 import random
@@ -54,6 +54,9 @@ def safe_delete(modeladmin, request, queryset):
                 targeter.save()
         player.delete()
 safe_delete.short_description = "**Safely** delete selected players"
+    
+# remove the default delete because it breaks things
+admin.site.disable_action('delete_selected')
 
 class PlayerAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -65,8 +68,14 @@ class PlayerAdmin(admin.ModelAdmin):
     search_fields = ['name', 'key', 'alive']
     ordering = ['-active', '-alive', 'name']
     actions = [generate_keys, initial_targets, toggle_alive, safe_delete]
-
-# remove the default delete because it breaks things
-admin.site.disable_action('delete_selected')
-
 admin.site.register(Player, PlayerAdmin)
+
+class NewsReportAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Report',  {'fields': ('report_type',)}),
+        ('Message', {'fields': ('message',)}),
+    ]
+    list_display = ('__unicode__', 'report_type', 'pub_date')
+    ordering = ['-pub_date']
+    actions = ['delete_selected']
+admin.site.register(NewsReport, NewsReportAdmin)
