@@ -1,9 +1,16 @@
-body,
 html {
     margin:0;
     padding:0;
     color:#000;
-    background:#ff9900;
+    background-image:linear-gradient(left, #15aa48 0%, white 50%, #15aa48 100%);
+    background-image:-moz-linear-gradient(left, #15aa48 0%, white 50%, #15aa48 100%);
+    background-image:-webkit-linear-gradient(left, #15aa48 0%, white 50%, #15aa48 100%);
+    background-image:-o-linear-gradient(left, #15aa48 0%, white 50%, #15aa48 100%);
+    background-color:#15aa48;
+}
+
+body {
+    font-family:Arial,Helvettica,sans-serif;
 }
 
 #wrap {
@@ -11,6 +18,9 @@ html {
     padding:0;
     margin:0 auto;
     background:#cdcdb4;
+    border-style:solid;
+    border-width:1.5px;
+    border-color:black
 }
         
 #header {
@@ -46,6 +56,15 @@ html {
     float:right;
     width:180px;
     margin:0;
+}
+#sidebar ul {
+    margin:20px;
+    padding:0;
+    list-style:none;
+}
+#sidebar li {
+    margin:2px;
+    padding:0;
 }
         
 #footer {
