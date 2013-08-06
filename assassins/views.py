@@ -29,7 +29,7 @@ def view_target(request):
         }, context_instance=RequestContext(request))
     else:
         return render_to_response('assassins/view_target.html', {
-            'system_message': "Your target is: " + str(player.target),
+            'system_message': "Your target is: " + str(reporting_player.target),
         }, context_instance=RequestContext(request))
     
         
