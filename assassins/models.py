@@ -29,4 +29,9 @@ class NewsReport(models.Model):
             return self.message[0:77] + '...'
         else:
             return self.message
-
+    
+    def message_tag(self):
+        if len(self.message) > 40:
+            return self.message[0:37] + '...'
+        else:
+            return self.message

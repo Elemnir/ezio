@@ -10,9 +10,9 @@
         <ul>
         {% for report in newslist %}
             {% if report.report_type == "KILL" %}
-            <li><a href="/assassins/news/{{ report.id }}/">{{ report }}</a></li>
+            <li><a href="/assassins/news/{{ report.id }}/">{{ report.message_tag }}</a></li>
             {% else %}
-            <li><strong><a href="/assassins/news/{{ report.id }}/">{{ report }}</a></strong></li>
+            <li><strong><a href="/assassins/news/{{ report.id }}/">{{ report.message_tag }}</a></strong></li>
             {% endif %}
         {% endfor %}
         </ul>

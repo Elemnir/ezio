@@ -1,4 +1,5 @@
 # Django settings for ezio project.
+EZIO_ROOT = "/home/karkadan/ezio" # CHANGE TO THE PROJECT ROOT
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -71,7 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/ele/prog/ezio/static',
+    EZIO_ROOT + "/static/",
 )
 
 # List of finder classes that know how to find static files in
@@ -111,7 +112,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/ele/prog/ezio/templates"
+    EZIO_ROOT + "/templates/",
 )
 
 INSTALLED_APPS = (
