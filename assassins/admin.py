@@ -44,6 +44,20 @@ def toggle_alive(modeladmin, request, queryset):
         player.save()
 toggle_alive.short_description = "Toggle Alive/Dead for selected players"
 
+def toggle_active(modeladmin, request, queryset):
+    """toggle whether or not each player in the queryset is marked as active"""
+    for player in queryset:
+        player.active = not player.active
+        player.save()
+toggle_active.short_description = "Toggle Active/Inactive for selected players"
+
+def reset_kills(modeladmin, request, queryset):
+    """set the kill count back to 0 for each player in the queryset"""
+    for player in queryset:
+        player.kills = 0
+        player.save()
+reset_kills.short_description = "Set selected player kill count back to 0"
+
 def safe_delete(modeladmin, request, queryset):
     """safely unlink and delete players in the queryset"""
     for player in queryset:
@@ -67,7 +81,8 @@ class PlayerAdmin(admin.ModelAdmin):
     list_display = ('active', 'name', 'alive', 'key', 'kills', 'target')
     search_fields = ['name', 'key', 'alive']
     ordering = ['-active', '-alive', 'name']
-    actions = [generate_keys, initial_targets, toggle_alive, safe_delete]
+    actions = [generate_keys, initial_targets, toggle_alive, toggle_active, 
+               safe_delete, reset_kills]
 admin.site.register(Player, PlayerAdmin)
 
 class NewsReportAdmin(admin.ModelAdmin):
