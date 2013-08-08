@@ -65,8 +65,8 @@ def report(request):
         reporting_player.target.save()
         
         # assign the reporter's new target and increase their kill count
+        reporting_player.increment_killcount()
         reporting_player.target = newtarget
-        reporting_player.kills += 1
         reporting_player.save()
 
         # build a message and render back the page

@@ -7,10 +7,16 @@ class Player(models.Model):
     active = models.BooleanField(default=True)
     alive = models.BooleanField(default=True)
     kills = models.IntegerField(default=0)
+    career_kills = models.IntegerField(default=0)
     target = models.ForeignKey('self', blank=True, null=True)
 
     def __unicode__(self):
         return self.name
+
+    def increment_killcount(self):
+        self.kills += 1
+        self.career_kills += 1
+        self.save()
 
 class NewsReport(models.Model):
     pub_date = models.DateTimeField('date published', auto_now_add=True)

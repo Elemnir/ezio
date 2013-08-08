@@ -3,8 +3,8 @@
 {% block title %}{{ block.super}} - Leaderboard{% endblock %}
 
 {% block content %}
-{% if playerlist %}
     <p><h2>Assassins Leaderboard</h2></p>
+    {% if playerlist %}
     <table>
         <tr>
             <th>Name</th>
@@ -13,12 +13,11 @@
         {% for player in playerlist %}
         <tr>
             <td class="namecol {% cycle "odd" "even" %}">{{ player.name }}</td>
-            <td class="numcol {% cycle "odd" "even" %}">{{ player.kills }}</td>
+            <td class="numcol {% cycle "odd" "even" %}">{{ player.career_kills }}</td>
         </tr>
         {% endfor %}
     </table>
 {% else %}
     <p>No players. Holler at an admin to fix it.</p>
 {% endif %}
-<br><br><br><br>
 {% endblock %}

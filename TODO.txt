@@ -8,7 +8,7 @@
 *Add user-submitted registration form
 *Allow registration to be turned on our off from the admin panel
 
-*Add images and work on the site's aethetic
-*Add welcome message and news to the assassins index
 *Add ruleset view (https://pypi.python.org/pypi/Markdown)
-
+ 
+*Style the forms and form views
+*Style the news archive and news lists
