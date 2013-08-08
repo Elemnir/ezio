@@ -17,26 +17,26 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>No news, someone's busted the database recently</p>
+        <p>No news, someone's busted the database recently.</p>
     {% endif %}
     </div>
+    
+    <hr>
 
     <div id='gamestats'>
     {% if playerlist %}
+        <h3>Current Game Statistics</h3>
         <table>
             <tr>
-                <th colspan=3>Current Game</th>
-            </tr>
-            <tr>
                 <th>Name</th>
-                <th>Kills</th>
                 <th>Alive</th>
+                <th>Kills</th>
             </tr>
             {% for player in playerlist %}
             <tr>
-                <td>{{ player.name }}</td>
-                <td>{{ player.kills }}</td>
-                <td>{{ player.alive }}</td>
+                <td class="namecol {% cycle "odd" "even" %}">{{ player.name }}</td>
+                <td class="{% cycle "odd" "even" %}">{{ player.alive }}</td>
+                <td class="numcol {% cycle "odd" "even" %}">{{ player.kills }}</td>
             </tr>
             {% endfor %}
         </table>

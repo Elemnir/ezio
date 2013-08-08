@@ -12,8 +12,8 @@
         </tr>
         {% for player in playerlist %}
         <tr>
-            <td>{{ player.name }}</td>
-            <td>{{ player.kills }}</td>
+            <td class="namecol {% cycle "odd" "even" %}">{{ player.name }}</td>
+            <td class="numcol {% cycle "odd" "even" %}">{{ player.kills }}</td>
         </tr>
         {% endfor %}
     </table>
