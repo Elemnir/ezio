@@ -22,7 +22,7 @@ def view_target(request):
 
     try:
         reporting_player = Player.objects.get(name=request.POST['playername'],
-                                              key=request.POST['playerkey'])
+                                              key=request.POST['playerkey'].upper())
     except (KeyError, Player.DoesNotExist):
         return render_to_response('assassins/view_target.html', {
             'system_message': "Your name or key is incorrect.",
@@ -40,13 +40,13 @@ def report(request):
                                   context_instance=RequestContext(request))
     try:
         reporting_player = Player.objects.get(name=request.POST['playername'],
-                                              key=request.POST['playerkey'])
+                                              key=request.POST['playerkey'].upper())
     except (KeyError, Player.DoesNotExist):
         return render_to_response('assassins/report.html', {
             'system_message': "Your name or key is incorrect.",
         }, context_instance=RequestContext(request))
     else:
-        if reporting_player.target.key != request.POST['targetkey']:
+        if reporting_player.target.key != request.POST['targetkey'].upper():
             return render_to_response('assassins/report.html', {
                 'system_message': "Incorrect key for your target.",
             }, context_instance=RequestContext(request))
@@ -80,7 +80,7 @@ def report(request):
 
 def leaderboard(request):
     """display a leaderboard of top players over all time"""
-    playerlist = Player.objects.all().order_by("-kills", "name")
+    playerlist = Player.objects.all().order_by("-career_kills", "name")
     return render_to_response('assassins/leaderboard.html', {
         'playerlist': playerlist,
     })

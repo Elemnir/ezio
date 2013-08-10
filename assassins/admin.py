@@ -74,12 +74,14 @@ admin.site.disable_action('delete_selected')
 
 class PlayerAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Player', {'fields': (('name', 'email'), 
-                               ('key', 'kills', 'alive', 'active'))}),
-        ('Target', {'fields': ['target'], 'classes': ['collapse']}),
+        ('Player', {'fields': ('name', 'email',)}),
+        ('Info', {'fields': (('target', 'key', 'kills'),
+                             ('active', 'alive', 'career_kills')), 
+                  'classes': ('collapse')}),
     ]
-    list_display = ('active', 'name', 'alive', 'key', 'kills', 'target')
-    search_fields = ['name', 'key', 'alive']
+    list_display = ('name', 'key', 'kills', 'career_kills', 'target', 
+                    'alive', 'active')
+    search_fields = ['name', 'key',]
     ordering = ['-active', '-alive', 'name']
     actions = [generate_keys, initial_targets, toggle_alive, toggle_active, 
                safe_delete, reset_kills]

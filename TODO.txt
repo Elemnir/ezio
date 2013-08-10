@@ -6,9 +6,8 @@
 *Add email-sending views and admin actions
 
 *Add user-submitted registration form
-*Allow registration to be turned on our off from the admin panel
+*Allow registration to be turned on or off from the admin panel
 
 *Add ruleset view (https://pypi.python.org/pypi/Markdown)
  
-*Style the forms and form views
 *Style the news archive and news lists
