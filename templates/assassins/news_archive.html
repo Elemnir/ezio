@@ -7,7 +7,11 @@
     {% if newslist %}
     <ul>
     {% for report in newslist %}
-        <li><a href="/assassins/news/{{ report.id }}/">{{ report }}</a></li>
+        {% if report.report_type == "KILL" %}
+        <li>{{ report.pub_date }} - <a href="/assassins/news/{{ report.id }}/">{{ report.message_tag }}</a></li>
+        {% else %}
+        <li>{{ report.pub_date }} - <strong><a href="/assassins/news/{{ report.id }}/">{{ report.message_tag }}</a></strong></li>
+        {% endif %}
     {% endfor %}
     </ul>
 {% else %}

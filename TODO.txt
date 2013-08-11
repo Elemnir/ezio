@@ -9,5 +9,3 @@
 *Allow registration to be turned on or off from the admin panel
 
 *Add ruleset view (https://pypi.python.org/pypi/Markdown)
- 
-*Style the news archive and news lists
