@@ -28,7 +28,7 @@ class NewsReport(models.Model):
     report_type = models.CharField(max_length=10, 
                                    choices=REPORT_TYPE_CHOICES,
                                    default='ALERT')
-    message = models.CharField(max_length=2048)
+    message = models.TextField()
     
     def __unicode__(self):
         if len(self.message) > 80:

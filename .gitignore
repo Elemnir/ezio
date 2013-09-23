@@ -2,3 +2,4 @@
 *.db
 *.exe
 *.swp
+settings.py

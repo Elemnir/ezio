@@ -1,6 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 from assassins.models import Player, NewsReport
 
 def index(request):
@@ -11,7 +15,7 @@ def index(request):
     return render_to_response('assassins/index.html', {
         'playerlist': playerlist,
         'newslist': newslist,
-    })
+    }, context_instance=RequestContext(request))
 
 
 def view_target(request):
@@ -31,8 +35,8 @@ def view_target(request):
         return render_to_response('assassins/view_target.html', {
             'system_message': "Your target is: " + str(reporting_player.target),
         }, context_instance=RequestContext(request))
-    
-        
+
+
 def report(request):
     """provides a form for logging kills"""
     if request.method != 'POST':
@@ -83,7 +87,7 @@ def leaderboard(request):
     playerlist = Player.objects.all().order_by("-career_kills", "name")
     return render_to_response('assassins/leaderboard.html', {
         'playerlist': playerlist,
-    })
+    }, context_instance=RequestContext(request))
 
 
 def news_archive(request):
@@ -91,7 +95,7 @@ def news_archive(request):
     newslist = NewsReport.objects.all().order_by("-pub_date")
     return render_to_response('assassins/news_archive.html', {
         'newslist': newslist,
-    })
+    }, context_instance=RequestContext(request))
 
 
 def news_detail(request, news_id):
@@ -99,4 +103,4 @@ def news_detail(request, news_id):
     report = get_object_or_404(NewsReport, pk=news_id)
     return render_to_response('assassins/news_detail.html', {
         'report': report,
-    })
+    }, context_instance=RequestContext(request))
